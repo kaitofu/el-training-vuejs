@@ -1,6 +1,23 @@
+// "@rails/webpacker": "^4.0.0-rc.7"時に適用される設定内容
+// module.exports = {
+//   test: /\.vue(\.erb)?$/,
+//   use: [{
+//     loader: 'vue-loader'
+//   }]
+// }
+
+// "@rails/webpacker": "3.5" 時に適用される設定内容
+const { dev_server: devServer } = require('@rails/webpacker').config
+
+const isProduction = process.env.NODE_ENV === 'production'
+const inDevServer = process.argv.find(v => v.includes('webpack-dev-server'))
+// const extractCSS = !(inDevServer && (devServer && devServer.hmr)) || isProduction
+const extractCSS = false
+
 module.exports = {
   test: /\.vue(\.erb)?$/,
   use: [{
-    loader: 'vue-loader'
+    loader: 'vue-loader',
+    options: { extractCSS }
   }]
 }
