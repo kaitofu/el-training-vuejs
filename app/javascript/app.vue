@@ -1,11 +1,17 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <Header></Header>
   </div>
 </template>
 
+
 <script>
+import Header from './packs/components/Header.vue'
+
 export default {
+    components: {
+      Header
+    },
   data: function () {
     return {
       message: "Hello"
