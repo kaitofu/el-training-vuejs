@@ -12,7 +12,8 @@ class Task < ApplicationRecord
         end
     end
 
-    enum priority: { 低: 0, 中: 1, 高: 2 }
+    # Frontendからのpost・get時それぞれで返却されるデータ型が異なると処理しにくいので一旦enumはOFF。これ以外の値が入らないよう他箇所で検証のこと
+    # enum priority: { 低: 0, 中: 1, 高: 2 }
     # enum status:   { 未着手: 0, 着手中: 1, 完了済: 2 }
 
     #FIXME: 共通部分を抽象化する
