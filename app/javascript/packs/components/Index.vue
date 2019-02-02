@@ -1,5 +1,7 @@
 <template lang="pug">
 div 
+  //- span newTask: {{ $data.newTask }}
+  //- span date: {{ $data.date }}
 
   //- 新規作成フォーム FIXME:後々別コンポーネント化する
   v-form()
@@ -32,8 +34,6 @@ div
             v-btn(flat='', color='primary', @click='sendCreateRequestToBackend') 作成
             v-btn(flat='', color='primary', @click='') クリア
 
-          span newTask: {{ $data.newTask }}
-          span date: {{ $data.date }}
           
 
   //- タスク一覧
@@ -98,7 +98,7 @@ div
         v-card-actions
           v-spacer
           v-btn(color='blue darken-1', flat='', @click='dialog = false') Close
-          v-btn(color='blue darken-1', flat='', @click='dialog = false') Save
+          v-btn(color='blue darken-1', flat='', @click='dialog = false, sendPatchRequestToBackend(editingTask.id)') Save
 
 </template>
 
@@ -136,6 +136,7 @@ export default {
       // modal
       dialog: false,
       editingTask: {
+        id: '',
         name:'',
         description: '',
         priority:'',
@@ -186,11 +187,20 @@ export default {
     },
     setEditingTask(taskId){
       let clickedTask              = this.tasks.find( presentTasksInArray =>  presentTasksInArray.id === taskId )
+      this.editingTask.id          = clickedTask.id,      
       this.editingTask.name        = clickedTask.name,
       this.editingTask.description = clickedTask.description,
       this.editingTask.priority    = clickedTask.priority,
       this.editingTask.status      = clickedTask.status
-    }
+    },
+    sendPatchRequestToBackend(taskId){
+      axios.put('/api/tasks/' + taskId , { task: this.editingTask }).then((response) => {
+        console.log(response)
+        this.fetchTasksFromBackend()
+      }, (error) => {
+        console.log(error)
+      })
+    },
   }
 }
 </script>
