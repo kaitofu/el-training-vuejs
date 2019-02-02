@@ -1,7 +1,5 @@
 <template lang="pug">
 div 
-  p newTask: {{ $data.newTask }}
-  p date: {{ $data.date }}
 
   //- 新規作成フォーム FIXME:後々別コンポーネント化する
   v-form()
@@ -31,9 +29,11 @@ div
             v-textarea(v-model='newTask.description', label='詳細', required='')
         
           v-flex(xs12='', md12='')
-            v-btn(flat='', color='primary', @click='$refs.menu.save(date)') 作成
-            v-btn(flat='', color='primary', @click='menu = false') クリア
+            v-btn(flat='', color='primary', @click='sendCreateRequestToBackend') 作成
+            v-btn(flat='', color='primary', @click='') クリア
 
+          span newTask: {{ $data.newTask }}
+          span date: {{ $data.date }}
           
 
   //- タスク一覧
@@ -69,7 +69,7 @@ import axios from 'axios'
 export default {
   components: {
   },
-  data: function () {
+  data(){
     return {
       // v-datepicker
       date: new Date().toISOString().substr(0, 10),
@@ -78,7 +78,7 @@ export default {
       menu2: false,
       
       // select
-      PriorityItems: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      PriorityItems: [1,2,3],
       StatusItems: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
       tasks: [],
@@ -88,23 +88,40 @@ export default {
         priority:'',
         status:'',
         // deadline:'' Datepickerで直接入力する方法が不明なので、dateプロパティをaxiosでのpost時に直接参照させる（FIXME）
-        // user_id: 
+        user_id: 1 
       },
     }
   },
-  mounted: function () {
+  mounted(){
     this.fetchTasksFromBackend();
   },
   methods: {
-    fetchTasksFromBackend: function() {
+    fetchTasksFromBackend(){
       axios.get('/api/tasks').then((response) => {
         console.log(response)
+        this.tasks = []
         for(var i = 0; i < response.data.tasks.length; i++) {
           this.tasks.push(response.data.tasks[i]);
         }
       }, (error) => {
         console.log(error)
       })
+    },
+    sendCreateRequestToBackend(){
+      axios.post('/api/tasks', { task: this.newTask }).then((response) => {
+        console.log(response)
+        this.clearNewTaskForm()
+        this.fetchTasksFromBackend()
+      }, (error) => {
+        console.log(error)
+      })
+    },
+    clearNewTaskForm(){
+      this.newTask.name = '',
+      this.newTask.description = '',
+      this.newTask.priority = '',
+      this.newTask.status = ''
+      // this.newTask.deadline = '',
     }
   }
 }
