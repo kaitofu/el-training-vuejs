@@ -42,12 +42,12 @@ div
       v-flex(xs12='', md10='')
         h3 Folders
         v-list(two-line='', subheader='')
-          v-list-tile(v-for='task in tasks', :key='task.id', avatar='', @click='')
+          v-list-tile(v-for='task in tasks', :key='task.id', avatar='')
             //- v-list-tile-avatar
               //- v-icon(:class='[task.iconClass]') {{ task.icon }}
             v-list-tile-action
               input(type='checkbox')
-            v-list-tile-content
+            v-list-tile-content(@click='dialog = true, setEditingTask(task.id)')
               v-list-tile-title {{ task.name }}
               v-list-tile-sub-title {{ task.description }}
             v-list-tile-action
@@ -63,6 +63,42 @@ div
                 v-icon(color='grey lighten-1') delete
 
           v-divider(inset='')
+
+
+  v-layout(row='', justify-center='')
+    v-dialog(v-model='dialog', persistent=false, max-width='600px')
+      v-btn(slot='activator', color='primary', dark='') Open Dialog
+      v-card
+        v-card-title
+          span.headline Edit Task
+        v-card-text
+          v-container(grid-list-md='')
+            v-layout(justify-center='', align-center='', row)
+              v-flex(xs12='', md10='')
+                v-flex(xs12='')
+                  v-flex(xs12='')
+                    v-text-field(v-model='editingTask.name', :counter='30', label='タスク名', required='')
+
+                  v-layout(justify-center='', align-center='')
+                    v-flex(xs4='', md4='')
+                      v-menu(ref='menu', :close-on-content-click='false', v-model='menu', :nudge-right='40', :return-value.sync='date', lazy='', transition='scale-transition', offset-y='', full-width='', min-width='290px')
+                        v-text-field(slot='activator', v-model='date', label='期限', prepend-icon='event', readonly='')
+                        v-date-picker(v-model='date', no-title='', scrollable='')
+                          v-spacer
+                          v-btn(flat='', color='primary', @click='menu = false') Cancel
+                          v-btn(flat='', color='primary', @click='$refs.menu.save(date)') OK
+
+                    v-flex(xs4='', md4='')
+                      v-select(:items="StatusItems", label="進捗状況", v-model='editingTask.status', required='true')
+                    v-flex(xs4='', md4='')              
+                      v-select(:items="PriorityItems", label="優先度", v-model='editingTask.priority', required='')
+              
+                v-flex(xs12='')
+                  v-textarea(v-model='editingTask.description', label='詳細', required='')
+        v-card-actions
+          v-spacer
+          v-btn(color='blue darken-1', flat='', @click='dialog = false') Close
+          v-btn(color='blue darken-1', flat='', @click='dialog = false') Save
 
 </template>
 
@@ -81,11 +117,25 @@ export default {
       menu2: false,
       
       // select
-      PriorityItems: [1,2,3],
-      StatusItems: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      PriorityItems: [
+        { text: '高', value: 2 },
+        { text: '中', value: 1 },
+        { text: '低', value: 0 }
+      ],
+      StatusItems: ['未着手', '着手中', '完了'],
 
       tasks: [],
       newTask: {
+        name:'',
+        description: '',
+        priority:'',
+        status:'',
+        // deadline:'' Datepickerで直接入力する方法が不明なので、dateプロパティをaxiosでのpost時に直接参照させる（FIXME）
+        user_id: 1 
+      },
+      // modal
+      dialog: false,
+      editingTask: {
         name:'',
         description: '',
         priority:'',
@@ -133,6 +183,13 @@ export default {
       }, (error) => {
         console.log(error)
       })
+    },
+    setEditingTask(taskId){
+      let clickedTask              = this.tasks.find( presentTasksInArray =>  presentTasksInArray.id === taskId )
+      this.editingTask.name        = clickedTask.name,
+      this.editingTask.description = clickedTask.description,
+      this.editingTask.priority    = clickedTask.priority,
+      this.editingTask.status      = clickedTask.status
     }
   }
 }
