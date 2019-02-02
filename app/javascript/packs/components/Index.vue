@@ -58,6 +58,9 @@ div
             v-list-tile-action
               v-btn(icon='', ripple='')
                 v-icon(color='grey lighten-1') info
+            v-list-tile-action
+              v-btn(icon='', ripple='', @click='deleteTask(task.id)')
+                v-icon(color='grey lighten-1') delete
 
           v-divider(inset='')
 
@@ -122,6 +125,14 @@ export default {
       this.newTask.priority = '',
       this.newTask.status = ''
       // this.newTask.deadline = '',
+    },
+    deleteTask(taskId){
+      axios.delete('/api/tasks/' + taskId).then((response) => {
+        console.log(response)
+        this.fetchTasksFromBackend()
+      }, (error) => {
+        console.log(error)
+      })
     }
   }
 }
