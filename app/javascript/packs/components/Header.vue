@@ -1,17 +1,40 @@
 <template lang="pug">
 div
-  v-app#inspire 
-    v-toolbar
-      v-toolbar-side-icon
-      v-toolbar-title Title
+    v-toolbar(color='orange darken-4', dark='', fixed='', app='')
+      v-toolbar-title El-Training
       v-spacer
-      v-toolbar-items.hidden-sm-and-down
-        v-btn 
-        v-btn 
-        v-btn 
+      v-toolbar-side-icon(@click.stop='drawer = !drawer')
 
-    v-alert(
-      :value="true"
-      type="success"
-    ) This is alert!
+    v-navigation-drawer(fixed='', v-model='drawer', right='', app='')
+      v-list(dense='')
+        v-list-tile(@click='')
+          v-list-tile-action
+            v-icon home
+          v-list-tile-content
+            v-list-tile-title Home
+        v-list-tile(@click='')
+          v-list-tile-action
+            v-icon contact_mail
+          v-list-tile-content
+            v-list-tile-title Contact
+    //- v-content
+    //-   v-container(fluid='', fill-height='')
+    //-     v-layout(justify-center='', align-center='', row wrap)
+    //-       //- v-flex(text-xps-center='')
 </template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      drawer: false
+    }
+  },
+  props: {
+    source: String
+  }
+}
+</script>
+
+<style scoped>
+</style>
