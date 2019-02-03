@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import Vuetify from 'vuetify'
+import router from './router.js'
 
 Vue.use(Vuetify)
 
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('main'))
   const app = new Vue({
     el,
+    router: router,
     render: h => h(App)
   })
   console.log(app)

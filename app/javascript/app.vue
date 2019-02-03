@@ -1,8 +1,28 @@
 <template lang="pug">
 #app
   v-app#inspire
-    Header  
-    Index
+    v-toolbar(color='orange darken-4', dark='', fixed='', app='')
+      v-toolbar-title El-Training
+      router-link(to="/") Home 
+      router-link(to="/login") Login
+      router-link(to="/admin") Admin
+      v-spacer
+      v-toolbar-side-icon(@click.stop='drawer = !drawer')
+    //- v-navigation-drawer(fixed='', v-model='drawer', right='', app='')
+    //-   v-list(dense='')
+    //-     v-list-tile(@click='')
+    //-       v-list-tile-action
+    //-         v-icon home
+    //-       v-list-tile-content
+    //-         v-list-tile-title Home
+    //-     v-list-tile(@click='')
+    //-       v-list-tile-action
+    //-         v-icon contact_mail
+    //-       v-list-tile-content
+    //-         v-list-tile-title Contact
+    router-view
+
+    //- Index
     Footer
 </template>
 
@@ -19,6 +39,7 @@ export default {
     },
   data: () => {
     return {
+      drawer: false
     }
   }
 }
