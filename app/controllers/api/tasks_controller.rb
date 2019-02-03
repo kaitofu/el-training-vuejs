@@ -1,5 +1,5 @@
 class Api::TasksController < ApplicationController
-  protect_from_forgery :except => [:create, :update]
+  protect_from_forgery :except => [:create, :update, :destroy]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -46,9 +46,13 @@ class Api::TasksController < ApplicationController
   end
 
   def destroy
-    task = current_user.tasks.find(params[:id])
-    task.destroy!
-    redirect_to tasks_path, notice: "タスク「#{task.name}」を削除しました。"
+    # task = current_user.tasks.find(params[:id])
+    task = Task.find(params[:id])
+    if task.destroy
+      render :index, status: :ok
+    else
+      render json: task.errors, status: :unprocessable_entity
+    end
   end
 
 private
