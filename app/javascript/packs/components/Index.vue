@@ -148,18 +148,33 @@ export default {
   },
   methods: {
     fetchTasksFromBackend(){
-      axios.get('/api/tasks').then((response) => {
-        console.log(response)
-        this.tasks = []
-        for(var i = 0; i < response.data.tasks.length; i++) {
-          this.tasks.push(response.data.tasks[i]);
+      axios({
+        method: 'get',
+        url: '/api/tasks',
+        headers: { 
+          'Authorization': 'Token qXu94q2ojDk119jaxL63fbwn',
+          'Content-Type':'application/json' }
+        })
+        .then((response) => {
+          console.log(response)
+          this.tasks = []
+          for(var i = 0; i < response.data.tasks.length; i++) {
+            this.tasks.push(response.data.tasks[i]);
         }
       }, (error) => {
         console.log(error)
       })
     },
     sendCreateRequestToBackend(){
-      axios.post('/api/tasks', { task: this.newTask }).then((response) => {
+      axios({
+        method: 'post',
+        url: '/api/tasks',
+        headers: { 
+          'Authorization': 'Token qXu94q2ojDk119jaxL63fbwn',
+          'Content-Type':'application/json' },
+        data: { task: this.newTask }
+      })
+      .then((response) => {
         console.log(response)
         this.fetchTasksFromBackend()
       }, (error) => {
@@ -174,7 +189,14 @@ export default {
       this.newTask.deadline = new Date().toISOString().substr(0, 10)
     },
     deleteTask(taskId){
-      axios.delete('/api/tasks/' + taskId).then((response) => {
+      axios({
+        method: 'delete',
+        url: '/api/tasks/' + taskId,
+        headers: { 
+          'Authorization': 'Token ' + this.$store.getters.auth_token, 
+          'Content-Type':'application/json' },
+      })
+      .then((response) => {
         console.log(response)
         this.fetchTasksFromBackend()
       }, (error) => {
@@ -190,7 +212,15 @@ export default {
       this.editingTask.status      = clickedTask.status
     },
     sendPatchRequestToBackend(taskId){
-      axios.put('/api/tasks/' + taskId , { task: this.editingTask }).then((response) => {
+      axios({
+        method: 'put',
+        url: '/api/tasks/' + taskId,
+        headers: {
+          'Authorization': 'Token ' + this.$store.getters.auth_token,
+          'Content-Type':'application/json' },
+        data: { task: this.editingTask }
+      })
+      .then((response) => {
         console.log(response)
         this.fetchTasksFromBackend()
       }, (error) => {

@@ -47,6 +47,7 @@ export default {
       .then((response) => {
         console.log(response)
         this.$store.dispatch('SetLogIn')
+        this.$store.dispatch('SetAuthToken', response.data.token)
         this.$router.push('/')
       },(error) => {
         console.log(error)
