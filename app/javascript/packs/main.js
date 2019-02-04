@@ -9,6 +9,7 @@ import Vue from 'vue'
 import App from '../app.vue'
 import Vuetify from 'vuetify'
 import router from './router.js'
+import store from './store'
 
 Vue.use(Vuetify)
 
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el,
     router: router,
+    store,
     render: h => h(App)
   })
   console.log(app)
