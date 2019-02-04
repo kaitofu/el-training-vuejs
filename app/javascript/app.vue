@@ -4,6 +4,7 @@
     v-toolbar(color='orange darken-4', dark='', fixed='', app='')
       v-toolbar-title El-Training
       v-spacer
+      p {{ this.$store.getters.auth_token }}
       router-link(to="/") Home 
       router-link(to="/login") Login
       router-link(to="/admin") Admin
@@ -47,6 +48,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('SetLogOut')
+      this.$store.dispatch('SetAuthToken', '')
       this.$router.push('/login')
     }
   }
