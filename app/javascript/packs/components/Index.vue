@@ -1,6 +1,11 @@
 <template lang="pug">
 div 
   //- 新規作成フォーム FIXME:後々別コンポーネント化する
+
+  v-alert(
+      v-model="alert"
+      dismissible
+      type="success") ログインしました.
   v-form()
     v-container
       v-layout(justify-center='', align-center='', row)
@@ -30,7 +35,7 @@ div
 
           //- デバッグ用
           p newTask
-          p {{ newTask  }}
+          p {{ newTask }}
 
           p editing
           p {{ editingTask }}
@@ -141,6 +146,9 @@ export default {
         deadline: new Date().toISOString().substr(0, 10),
         user_id: 1 
       },
+
+      // v-alert
+      alert: true
     }
   },
   mounted(){

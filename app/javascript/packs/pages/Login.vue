@@ -17,8 +17,13 @@ div
 
     v-btn(@click='login()') login
 
-    v-btn(@click='test()') test
-
+  v-container
+    v-layout
+      v-flex(xs12='', md6='')
+        v-alert(
+              v-model="alert"
+              dismissible
+              type="error") ログインに失敗しました。
 </template>
 
 <script>
@@ -32,7 +37,10 @@ export default {
         password: ''
       },
       // for password-field
-      visibility: false
+      visibility: false,
+
+      // v-alert
+      alert: false
     }
   },
   methods: {
@@ -51,6 +59,7 @@ export default {
         this.$router.push('/')
       },(error) => {
         console.log(error)
+        this.alert = true
       })
     }
   }
