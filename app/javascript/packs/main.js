@@ -8,6 +8,8 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import Vuetify from 'vuetify'
+import router from './router.js'
+import store from './store'
 
 Vue.use(Vuetify)
 
@@ -15,10 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('main'))
   const app = new Vue({
     el,
+    router: router,
+    store,
     render: h => h(App)
   })
-  console.log(app)
 })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !store.getters.loggedIn) {
+    next({ path: '/login', query: { redirect: to.fullPath }});
+  } else {
+    next();
+  }
+});
+// console.log(store)
 
 
 // The above code uses Vue without the compiler, which means you cannot
