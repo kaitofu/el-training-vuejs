@@ -1,14 +1,14 @@
 <template lang="pug">
 div
-  p login
-  p login
-  p login
-
-  v-container
+  v-container(align-content-center='true')
     v-layout
       v-flex(xs12='', md12='')
+        h1 ログイン  
+    v-layout
+      v-flex(xs12='', md6='')
         v-text-field(v-model='login_input.email', label='メールアドレス')
-      v-flex(xs12='', md12='')
+    v-layout      
+      v-flex(xs12='', md6='')
         v-text-field(v-model='login_input.password',
                     label='パスワード', 
                     :append-icon="visibility ? 'visibility_off' : 'visibility'", 
@@ -56,6 +56,7 @@ export default {
         console.log(response)
         this.$store.dispatch('SetLogIn')
         this.$store.dispatch('SetAuthToken', response.data.token)
+        this.$store.dispatch('SetLoginUserId', response.data.id)
         this.$router.push('/')
       },(error) => {
         console.log(error)

@@ -4,8 +4,7 @@ class Api::TasksController < ApplicationController
   before_action :authenticate
 
   def index
-    # @tasks = current_user.tasks.order(sort_column + ' ' + sort_direction).search_by_name(params[:name]).search('status', params[:status]).search('priority', params[:priority]).page(params[:page]).includes(:user)
-    @tasks = Task.all.order(sort_column + ' ' + sort_direction).search_by_name(params[:name]).search('status', params[:status]).search('priority', params[:priority]).page(params[:page]).includes(:user)
+    @tasks = current_user.tasks.order(sort_column + ' ' + sort_direction).search_by_name(params[:name]).search('status', params[:status]).search('priority', params[:priority]).page(params[:page]).includes(:user)
   end
 
   def show
