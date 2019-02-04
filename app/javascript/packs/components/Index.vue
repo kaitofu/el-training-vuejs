@@ -1,7 +1,6 @@
 <template lang="pug">
 div 
   //- 新規作成フォーム FIXME:後々別コンポーネント化する
-
   v-alert(
       v-model="alert"
       dismissible
@@ -136,7 +135,7 @@ export default {
         priority:'',
         status:'',
         deadline: new Date().toISOString().substr(0, 10),
-        user_id: 1 
+        user_id: this.$store.getters.current_user_id
       },
       // v-datepicker
       newDate: new Date().toISOString().substr(0, 10),
@@ -162,7 +161,7 @@ export default {
         priority:'',
         status:'',
         deadline: new Date().toISOString().substr(0, 10),
-        user_id: 1 
+        user_id: this.$store.getters.current_user_id
       },
 
       // v-alert
@@ -186,7 +185,7 @@ export default {
         method: 'get',
         url: '/api/tasks',
         headers: { 
-          'Authorization': 'Token qXu94q2ojDk119jaxL63fbwn',
+          'Authorization': 'Token ' + this.$store.getters.auth_token,
           'Content-Type':'application/json' }
         })
         .then((response) => {
@@ -204,7 +203,7 @@ export default {
         method: 'post',
         url: '/api/tasks',
         headers: { 
-          'Authorization': 'Token qXu94q2ojDk119jaxL63fbwn',
+          'Authorization': 'Token ' + this.$store.getters.auth_token,
           'Content-Type':'application/json' },
         data: { task: this.newTask }
       })
