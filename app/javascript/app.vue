@@ -26,7 +26,4 @@ p {
   font-size: 2em;
   text-align: center;
 }
-.theme--light.application {
-  background-color: white;
-}
 </style>

@@ -1,21 +1,21 @@
 <template lang="pug">
 div
-  v-container(align-content-center='true')
-    v-layout
-      v-flex(xs12='', md12='')
-        h1 ログイン  
-    v-layout
-      v-flex(xs12='', md6='')
-        v-text-field(v-model='login_input.email', label='メールアドレス')
-    v-layout      
-      v-flex(xs12='', md6='')
+  v-container(align-content-center)
+    v-layout(justify-center='', align-center='', row)
+      v-flex(xs12='', md5='')
+        span.headline El-Training-Vue.js ログイン
+    v-layout(justify-center='', align-center='', row)
+      v-flex(xs12='', md5='')
+        v-text-field(v-model='login_input.email', label='メールアドレス' browser-autocomplete placeholder='test_user_a@example.com')
+    v-layout(justify-center='', align-center='', row)
+      v-flex(xs12='', md5='')
         v-text-field(v-model='login_input.password',
                     label='パスワード', 
                     :append-icon="visibility ? 'visibility_off' : 'visibility'", 
                     :type="visibility ? 'text' : 'password'", 
                     @click:append="visibility = !visibility")
-
-    v-btn(@click='login()') login
+    v-layout(justify-center='', align-center='', row)
+      v-btn(@click='login()' outline color='#FF9505') login
 
   v-container
     v-layout
@@ -68,5 +68,7 @@ export default {
 </script>
 
 <style>
-
+.container {
+  background: white;
+}
 </style>
