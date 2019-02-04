@@ -1,17 +1,19 @@
 class SessionsController < ApplicationController
     # skip_before_action :login_required
+    protect_from_forgery :except => [:create]
+
 
     def new
     end
 
+    # POST /login
     def create
         user = User.find_by(email: session_params[:email])
 
         if user&.authenticate(session_params[:password])
-            session[:user_id] = user.id
-            redirect_to tasks_path, notice: "こんにちは、#{user.name}様。"
+            render json: user, status: :created
         else
-            render :new
+            render plain: '403 Forbidden', status: 403
         end
     end
 
