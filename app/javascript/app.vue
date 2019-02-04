@@ -3,11 +3,13 @@
   v-app#inspire
     v-toolbar(color='orange darken-4', dark='', fixed='', app='')
       v-toolbar-title El-Training
+      v-spacer
       router-link(to="/") Home 
       router-link(to="/login") Login
       router-link(to="/admin") Admin
-      v-spacer
-      v-toolbar-side-icon(@click.stop='drawer = !drawer')
+      p {{ this.$store.getters.loggedIn }}
+      v-btn(v-if="this.$store.getters.loggedIn" @click="logout()") logout
+      //- v-toolbar-side-icon(@click.stop='drawer = !drawer')
     //- v-navigation-drawer(fixed='', v-model='drawer', right='', app='')
     //-   v-list(dense='')
     //-     v-list-tile(@click='')
@@ -40,6 +42,12 @@ export default {
   data: () => {
     return {
       drawer: false
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('SetLogOut')
+      this.$router.push('/login')
     }
   }
 }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from './pages/Main.vue'
 import Login from './pages/Login.vue'
-import Admin from './pages/Admin.vue'
+// import Admin from './pages/Admin.vue'
 
 // import store from './store' // (1)
 
@@ -12,16 +12,13 @@ const router = new Router({
 	routes: [
       {
       path: '/',
-      component: Main
+      component: Main,
+      meta: { requiresAuth: true }
 		},
 		{
       path: '/login',
       component: Login
-		},
-		{
-      path: '/admin',
-      component: Admin
-		},
+		}
    ]
 })
 

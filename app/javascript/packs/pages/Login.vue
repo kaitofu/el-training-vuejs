@@ -2,31 +2,56 @@
 div
   p login
   p login
-
   p login
-  v-btn(@click='login') login
-  v-btn(@click='logout') logout
 
-  p {{ loggedIn }}
+  v-container
+    v-layout
+      v-flex(xs12='', md12='')
+        v-text-field(v-model='login_input.email', label='メールアドレス')
+      v-flex(xs12='', md12='')
+        v-text-field(v-model='login_input.password',
+                    label='パスワード', 
+                    :append-icon="visibility ? 'visibility_off' : 'visibility'", 
+                    :type="visibility ? 'text' : 'password'", 
+                    @click:append="visibility = !visibility")
+
+    v-btn(@click='login()') login
+
+    v-btn(@click='test()') test
+
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {    
   data() {
     return {
-      loggedIn: false
+      login_input: {
+        email: '',
+        password: ''
+      },
+      // for password-field
+      visibility: false
     }
   },
   methods: {
     login() {
-      // Auth.login();
-      this.loggedIn = true
-      console.log(this.$route)
-      router.push(this.$route.query.redirect);
-    },
-    logout() {
-      this.loggedIn = false 
-    }  
+      let login_input = this.login_input
+      axios({
+        method: 'post',
+        url: '/login',
+        headers: { 'Content-Type': 'application/json' },
+        data: login_input
+      })
+      .then((response) => {
+        console.log(response)
+        this.$store.dispatch('SetLogIn')
+        this.$router.push('/')
+      },(error) => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>

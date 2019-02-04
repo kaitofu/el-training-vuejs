@@ -21,8 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
     store,
     render: h => h(App)
   })
-  console.log(app)
 })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !store.getters.loggedIn) {
+    next({ path: '/login', query: { redirect: to.fullPath }});
+  } else {
+    next();
+  }
+});
+// console.log(store)
 
 
 // The above code uses Vue without the compiler, which means you cannot

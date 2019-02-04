@@ -3,20 +3,35 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const state = {
-  message: 'hello vuex',
-  isAuth: false
-};
+const store = new Vuex.Store({
+  state: {
+    message: 'hello vuex',
+    loggedIn: false
+  },
 
-const mutations = {
+  getters: {
+    loggedIn(state) {
+      return state.loggedIn
+    }
+  },
 
-};
+  mutations: {
+    LogIn(state){
+      state.loggedIn = true
+    },
+    LogOut(state){
+      state.loggedIn = false
+    }
+  },
 
-const actions = {
-};
-
-export default new Vuex.Store({
-  state: state,
-  mutations: mutations,
-  actions: actions
+  actions: {
+    SetLogIn({commit}){
+      commit('LogIn')
+    },
+    SetLogOut({commit}){
+      commit('LogOut')
+    }
+  }
 });
+
+export default store
