@@ -1,29 +1,21 @@
 <template lang="pug">
 div
-  p login
-  p login
-  p login
-
-  v-container
-    v-layout
-      v-flex(xs12='', md12='')
-        v-text-field(v-model='login_input.email', label='メールアドレス')
-      v-flex(xs12='', md12='')
+  v-container(align-content-center)
+    v-layout(justify-center='', align-center='', row)
+      v-flex(xs12='', md5='')
+        span.headline El-Training-Vue.js ログイン
+    v-layout(justify-center='', align-center='', row)
+      v-flex(xs12='', md5='')
+        v-text-field(v-model='login_input.email', label='メールアドレス' browser-autocomplete placeholder='test_user_a@example.com')
+    v-layout(justify-center='', align-center='', row)
+      v-flex(xs12='', md5='')
         v-text-field(v-model='login_input.password',
                     label='パスワード', 
                     :append-icon="visibility ? 'visibility_off' : 'visibility'", 
                     :type="visibility ? 'text' : 'password'", 
                     @click:append="visibility = !visibility")
-
-    v-btn(@click='login()') login
-
-  v-container
-    v-layout
-      v-flex(xs12='', md6='')
-        v-alert(
-              v-model="alert"
-              dismissible
-              type="error") ログインに失敗しました。
+    v-layout(justify-center='', align-center='', row)
+      v-btn(@click='login()' outline color='#FF9505') login
 </template>
 
 <script>
@@ -56,10 +48,12 @@ export default {
         console.log(response)
         this.$store.dispatch('SetLogIn')
         this.$store.dispatch('SetAuthToken', response.data.token)
+        this.$store.dispatch('SetLoginUserId', response.data.id)
         this.$router.push('/')
+        this.$snotify.success('ログインしました。');
       },(error) => {
         console.log(error)
-        this.alert = true
+        this.$snotify.error('ログインに失敗しました。');
       })
     }
   }
@@ -67,5 +61,7 @@ export default {
 </script>
 
 <style>
-
+.container {
+  background: white;
+}
 </style>
