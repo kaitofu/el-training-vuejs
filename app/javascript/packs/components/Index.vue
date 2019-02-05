@@ -1,11 +1,6 @@
 <template lang="pug">
 div 
   //- 新規作成フォーム FIXME:後々別コンポーネント化する
-
-  v-alert(
-      v-model="alert"
-      dismissible
-      type="success") ログインしました.
   v-form()
     v-container
       v-layout(justify-center='', align-center='', row)
@@ -34,11 +29,11 @@ div
             v-btn(flat='', color='primary', @click='clearNewTaskForm') クリア
 
           //- デバッグ用
-          p newTask
-          p {{ newTask }}
+          //- p newTask
+          //- p {{ newTask }}
 
-          p editing
-          p {{ editingTask }}
+          //- p editing
+          //- p {{ editingTask }}
 
   //- タスク一覧
   v-container
@@ -67,15 +62,15 @@ div
 
                 v-list
                   v-list-tile(v-for='(item, index) in PriorityItems', :key='index')
-                    v-list-tile-title(@click='updatePriority(task.id, item.text)') {{ item.text }}
+                    //- v-list-tile-title(@click='updatePriority(task.id, item.text)') {{ item.text }}
+                    v-list-tile-title(@click='updatePriority(task.id, item.value)') {{ item.text }}
                     
             v-list-tile-action
               v-btn(icon='', ripple='')
-                v-icon(color='grey lighten-1', @click='dialog = true, setEditingTask(task.id)') info
+                v-icon(color='rgba(0,0,0,0.87)', @click='dialog = true, setEditingTask(task.id)') mdi-pencil
             v-list-tile-action
               v-btn(icon='', ripple='')
-                v-icon(color='grey lighten-1', @click='confirmDialog = true, setEditingTask(task.id)') delete
-
+                v-icon(color='rgba(0,0,0,0.87)', @click='confirmDialog = true, setEditingTask(task.id)') mdi-trash-can-outline
           v-divider(inset='')
   
   //- タスク編集フォーム 
@@ -161,12 +156,9 @@ export default {
         description: '',
         priority:'',
         status:'',
-        deadline: new Date().toISOString().substr(0, 10),
-        user_id: 1 
+        deadline: '',
+        user_id: this.$store.getters.current_user_id
       },
-
-      // v-alert
-      alert: true,
       
       // delete confirm
       confirmDialog: false
@@ -242,6 +234,7 @@ export default {
       this.editingTask.id          = clickedTask.id,      
       this.editingTask.name        = clickedTask.name,
       this.editingTask.description = clickedTask.description,
+      this.editingTask.deadline    = clickedTask.deadline
       this.editingTask.priority    = clickedTask.priority,
       this.editingTask.status      = clickedTask.status
     },

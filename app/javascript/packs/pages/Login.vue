@@ -14,16 +14,8 @@ div
                     :append-icon="visibility ? 'visibility_off' : 'visibility'", 
                     :type="visibility ? 'text' : 'password'", 
                     @click:append="visibility = !visibility")
-
-    v-btn(@click='login()') login
-
-  v-container
-    v-layout
-      v-flex(xs12='', md6='')
-        v-alert(
-              v-model="alert"
-              dismissible
-              type="error") ログインに失敗しました。
+    v-layout(justify-center='', align-center='', row)
+      v-btn(@click='login()' outline color='#FF9505') login
 </template>
 
 <script>
@@ -57,9 +49,10 @@ export default {
         this.$store.dispatch('SetLogIn')
         this.$store.dispatch('SetAuthToken', response.data.token)
         this.$router.push('/')
+        this.$snotify.success('ログインしました。');
       },(error) => {
         console.log(error)
-        this.alert = true
+        this.$snotify.error('ログインに失敗しました。');
       })
     }
   }

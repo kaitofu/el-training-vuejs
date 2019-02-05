@@ -23,6 +23,7 @@ export default {
     this.$store.dispatch('SetLogOut')
     this.$store.dispatch('SetAuthToken', '')
     this.$router.push('/login')
+    this.$snotify.warning('ログアウトしました。');
     }
   }
 }
