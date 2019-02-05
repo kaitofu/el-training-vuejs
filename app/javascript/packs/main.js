@@ -10,8 +10,13 @@ import App from '../app.vue'
 import Vuetify from 'vuetify'
 import router from './router.js'
 import store from './store'
+import Snotify from 'vue-snotify'; // 1. Import Snotify
+// 2. Use Snotify
+// You can pass {config, options} as second argument. See the next example or setConfig in [API] section 
 
 Vue.use(Vuetify)
+
+Vue.use(Snotify)
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('main'))
