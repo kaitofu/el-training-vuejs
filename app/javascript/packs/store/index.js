@@ -7,7 +7,8 @@ const store = new Vuex.Store({
   state: {
     message: 'hello vuex',
     loggedIn: false,
-    auth_token: ''
+    auth_token: '',
+    user_id: ''
   },
 
   getters: {
@@ -16,6 +17,9 @@ const store = new Vuex.Store({
     },
     auth_token(state) {
       return state.auth_token
+    },
+    current_user_id(state) {
+      return state.user_id
     }
   },
 
@@ -28,6 +32,9 @@ const store = new Vuex.Store({
     },
     SetToken(state, passed_token){
       state.auth_token = passed_token
+    },
+    SetUserId(state, userId){
+      state.user_id = userId
     }
   },
 
@@ -40,6 +47,9 @@ const store = new Vuex.Store({
     },
     SetAuthToken({commit}, payload){
       commit('SetToken', payload)
+    },
+    SetLoginUserId({commit}, payload){
+      commit('SetUserId', payload)
     }
   }
 });
