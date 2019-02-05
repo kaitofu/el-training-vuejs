@@ -13,20 +13,14 @@ This application extended El-Training which was created in the learning process 
 (Screenshot)
 
 
-### Published at:
+## Published at:
 https://el-training-koalamask.herokuapp.com/
 
-#### The following users can be used:
+The following users can be used in application:
 
-User as an admininstrator: 
+[User as an admininstrator] email: test_user_a@example.com,  password: password
 
-email: test_user_a@example.com
-password: password
-
-Common user: 
-
-email: test_user_b@example.com
-password: password
+[Common user] email: test_user_b@example.com,  password: password
 
 ### Curriculum
 [株式会社万葉の新入社員教育用カリキュラム https://everyleaf.com/](https://github.com/everyleaf/el-training)
@@ -36,7 +30,9 @@ password: password
 
 ## Requirement
 Ruby 2.5.3
+
 Bundler 1.17.3
+
 PostgreSQL 10.4
 
 
@@ -54,17 +50,17 @@ $ cd el-training-vuejs
 
 3. Install Ruby 2.5.3 (If nessesary) 
 ```
-$ rbenv install 2.5.3（必要に応じて）
+$ rbenv install 2.5.3
 ```
 
 3. Set Ruby version to 2.53(If nessesary)
 ```
-$ rbenv local 2.5.3（必要に応じて）
+$ rbenv local 2.5.3
 ```
 
 4. Install Bundler 1.17.3(If nessesary)
 ```
-$ gem install bundler -v 1.17.3（必要に応じて）
+$ gem install bundler -v 1.17.3
 ```
 
 5. Install gems
@@ -111,4 +107,4 @@ Then, you can see app in `http://localhost:5000`
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md]() file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/koalamask/el-training-vuejs/blob/master/LICENSE.md) file for details
