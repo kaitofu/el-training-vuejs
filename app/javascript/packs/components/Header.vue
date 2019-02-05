@@ -1,12 +1,12 @@
 <template lang="pug">
 div
-  v-toolbar(color='#1B9FC6', dark='', fixed='', app='')
+  v-toolbar(color='orange darken-4', dark='', fixed='', app='')
     v-toolbar-title El-Training
     v-spacer
-    router-link(to="/").header-link Home 
-    router-link(to="/login").header-link  Login
-    router-link(to="/admin").header-link  Admin
-    v-btn(outline color='indigo' v-if="this.$store.getters.loggedIn" @click="logout()") logout
+    router-link(to="/") Home 
+    router-link(to="/login") Login
+    router-link(to="/admin") Admin
+    v-btn(v-if="this.$store.getters.loggedIn" @click="logout()") logout
 </template>
 
 <script>
@@ -30,11 +30,4 @@ export default {
 </script>
 
 <style scoped>
-.header-link {
-  color:white; 
-  font-size: 16px; 
-  font-weight: 500; 
-  letter-spacing: .02em;
-  padding: 0 10px 0 10px; 
-}
 </style>

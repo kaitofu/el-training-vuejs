@@ -4,30 +4,29 @@ div
   v-form()
     v-container
       v-layout(justify-center='', align-center='', row)
-        v-flex(xs12='', md9='')
+        v-flex(xs12='', md10='')
           h3 タスク新規作成
-          //- v-flex(xs12='')
-          v-layout(justify-center='', align-center='')
-            v-flex(xs12='', md8='')
-              v-text-field(v-model='newTask.name', :counter='30', label='タスク名', required='')
-            v-flex(xs12='', sm6='', md2='')
-              v-menu(ref='menu', :close-on-content-click='false', v-model='menu', :nudge-right='40', :return-value.sync='newTask.deadline', lazy='', transition='scale-transition', offset-y='', full-width='', min-width='290px')
-                v-text-field(slot='activator', v-model='newTask.deadline', label='Picker in menu', prepend-icon='event', readonly='')
-                v-date-picker(v-model='newTask.deadline', no-title='', scrollable='')
-                  v-spacer
-                  v-btn(flat='', color='primary', @click='menu = false') Cancel
-                  v-btn(flat='', color='primary', @click='$refs.menu.save(newTask.deadline)') OK
-            v-flex(xs4='', md2='')              
-              v-select(:items="PriorityItems", label="優先度", v-model='newTask.priority', required='')
-            //- v-spacer
-          v-layout(justify-center='', align-center='')            
-            //- v-flex(xs4='', md4='')
-              v-select(:items="StatusItems", label="進捗状況", v-model='newTask.status', required='true')
+          v-flex(xs12='')
             v-flex(xs12='')
-              v-text-field(v-model='newTask.description', label='詳細', required='')
+              v-text-field(v-model='newTask.name', :counter='30', label='タスク名', required='')
+            v-layout(justify-center='', align-center='')
+              v-flex(xs12='', sm6='', md4='')
+                v-menu(ref='menu', :close-on-content-click='false', v-model='menu', :nudge-right='40', :return-value.sync='newTask.deadline', lazy='', transition='scale-transition', offset-y='', full-width='', min-width='290px')
+                  v-text-field(slot='activator', v-model='newTask.deadline', label='Picker in menu', prepend-icon='event', readonly='')
+                  v-date-picker(v-model='newTask.deadline', no-title='', scrollable='')
+                    v-spacer
+                    v-btn(flat='', color='primary', @click='menu = false') Cancel
+                    v-btn(flat='', color='primary', @click='$refs.menu.save(newTask.deadline)') OK
+              v-spacer
+              v-flex(xs4='', md4='')
+                v-select(:items="StatusItems", label="進捗状況", v-model='newTask.status', required='true')
+              v-flex(xs4='', md4='')              
+                v-select(:items="PriorityItems", label="優先度", v-model='newTask.priority', required='')
+          v-flex(xs12='')
+            v-textarea(v-model='newTask.description', label='詳細', required='')
           v-flex(xs12='', md12='')
-            v-btn(color='#FF9505' @click='sendCreateRequestToBackend').white--text 作成
-            v-btn(flat='', outline color='#1B9FC6', @click='clearNewTaskForm') クリア
+            v-btn(flat='', color='primary', @click='sendCreateRequestToBackend') 作成
+            v-btn(flat='', color='primary', @click='clearNewTaskForm') クリア
 
           //- デバッグ用
           //- p newTask
@@ -39,16 +38,16 @@ div
   //- タスク一覧
   v-container
     v-layout(justify-center='', align-center='', row)
-      v-flex(xs12='', md9='')
+      v-flex(xs12='', md10='')
         h3 タスク一覧
         v-list(two-line='', subheader='')
           v-list-tile(v-for='task in tasks', :key='task.id', avatar='')
             //- v-list-tile-avatar
               //- v-icon(:class='[task.iconClass]') {{ task.icon }}
             v-list-tile-action
-              v-icon(v-if='task.status === "未着手"' color='#FF9505' @click='toggleStatus(task.id, "着手中")') mdi-checkbox-blank-circle-outline
-              v-icon(v-else-if='task.status === "着手中"' color='#FF9505' @click='toggleStatus(task.id, "完了")') mdi-progress-check
-              v-icon(v-else-if='task.status === "完了"' color='#FF9505' @click='toggleStatus(task.id, "未着手")') mdi-check-circle
+              v-icon(v-if='task.status === "未着手"' color='grey' @click='toggleStatus(task.id, "着手中")') mdi-checkbox-blank-circle-outline
+              v-icon(v-else-if='task.status === "着手中"' color='grey' @click='toggleStatus(task.id, "完了")') mdi-progress-check
+              v-icon(v-else-if='task.status === "完了"' color='grey' @click='toggleStatus(task.id, "未着手")') mdi-check-circle
             v-list-tile-content(@click='dialog = true, setEditingTask(task.id)')
               v-list-tile-title {{ task.name }}
               v-list-tile-sub-title {{ task.description }}
@@ -57,9 +56,9 @@ div
             v-list-tile-action
               v-menu(open-on-click top offset-y)
                 v-btn(slot="activator" icon='', ripple='')
-                  v-icon(v-if='task.priority === 2' color='deep-orange darken-2') flag
-                  v-icon(v-else-if='task.priority === 1' color='orange darken-1') flag
-                  v-icon(v-else-if='task.priority === 0' color='yellow darken-1') flag
+                  v-icon(v-if='task.priority === 2' color='red') flag
+                  v-icon(v-else-if='task.priority === 1' color='yellow') flag
+                  v-icon(v-else-if='task.priority === 0' color='green') flag
 
                 v-list
                   v-list-tile(v-for='(item, index) in PriorityItems', :key='index')
@@ -130,9 +129,9 @@ export default {
         name:'',
         description: '',
         priority:'',
-        status:'未着手',
+        status:'',
         deadline: new Date().toISOString().substr(0, 10),
-        user_id: this.$store.getters.current_user_id
+        user_id: 1 
       },
       // v-datepicker
       newDate: new Date().toISOString().substr(0, 10),
@@ -179,7 +178,7 @@ export default {
         method: 'get',
         url: '/api/tasks',
         headers: { 
-          'Authorization': 'Token ' + this.$store.getters.auth_token,
+          'Authorization': 'Token qXu94q2ojDk119jaxL63fbwn',
           'Content-Type':'application/json' }
         })
         .then((response) => {
@@ -197,7 +196,7 @@ export default {
         method: 'post',
         url: '/api/tasks',
         headers: { 
-          'Authorization': 'Token ' + this.$store.getters.auth_token,
+          'Authorization': 'Token qXu94q2ojDk119jaxL63fbwn',
           'Content-Type':'application/json' },
         data: { task: this.newTask }
       })
@@ -293,10 +292,7 @@ export default {
 </script>
 
 <style scoped>
-.flex.xs4.md2 {
-  padding-left: 10px;
-}
-.container {
-  background: white;
+.flex.xs4.md4 {
+  padding: 2px;
 }
 </style>

@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
         user = User.find_by(email: session_params[:email])
 
         if user&.authenticate(session_params[:password])
-            session[:user_id] = user.id
             render json: user, status: :created
         else
             render plain: '403 Forbidden', status: 403

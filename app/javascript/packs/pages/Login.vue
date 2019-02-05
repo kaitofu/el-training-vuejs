@@ -1,14 +1,14 @@
 <template lang="pug">
 div
-  v-container(align-content-center)
-    v-layout(justify-center='', align-center='', row)
-      v-flex(xs12='', md5='')
-        span.headline El-Training-Vue.js ログイン
-    v-layout(justify-center='', align-center='', row)
-      v-flex(xs12='', md5='')
-        v-text-field(v-model='login_input.email', label='メールアドレス' browser-autocomplete placeholder='test_user_a@example.com')
-    v-layout(justify-center='', align-center='', row)
-      v-flex(xs12='', md5='')
+  p login
+  p login
+  p login
+
+  v-container
+    v-layout
+      v-flex(xs12='', md12='')
+        v-text-field(v-model='login_input.email', label='メールアドレス')
+      v-flex(xs12='', md12='')
         v-text-field(v-model='login_input.password',
                     label='パスワード', 
                     :append-icon="visibility ? 'visibility_off' : 'visibility'", 
@@ -48,7 +48,6 @@ export default {
         console.log(response)
         this.$store.dispatch('SetLogIn')
         this.$store.dispatch('SetAuthToken', response.data.token)
-        this.$store.dispatch('SetLoginUserId', response.data.id)
         this.$router.push('/')
         this.$snotify.success('ログインしました。');
       },(error) => {
@@ -61,7 +60,5 @@ export default {
 </script>
 
 <style>
-.container {
-  background: white;
-}
+
 </style>
