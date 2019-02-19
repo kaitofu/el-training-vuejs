@@ -10,11 +10,8 @@
 This application extended El-Training which was created in the learning process of Web application creation using Ruby and Ruby On Rails, tried to improve beyond the curriculum category.
 
 
-(Screenshot)
-
-
 ## Published at:
-https://el-training-koalamask.herokuapp.com/
+https://el-training-with-vuejs.herokuapp.com/
 
 The following users can be used in application:
 
