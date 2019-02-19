@@ -6,7 +6,7 @@ div
     router-link(to="/").header-link Home 
     router-link(to="/login").header-link  Login
     router-link(to="/about").header-link  About
-    v-btn(outline color='indigo' v-if="this.$store.getters.loggedIn" @click="logout()") logout
+    v-btn(outline color='indigo lighten-5' v-if="this.$store.getters.loggedIn" @click="logout()") logout
 </template>
 
 <script>
