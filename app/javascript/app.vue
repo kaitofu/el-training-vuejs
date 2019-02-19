@@ -1,6 +1,6 @@
 <template lang="pug">
 #app
-  link(href="https://unpkg.com/vue-snotify@3.0.4/styles/material.css" rel="stylesheet")
+  //- link(href="https://unpkg.com/vue-snotify@3.0.4/styles/material.css" rel="stylesheet")
   vue-snotify
   v-app#inspire
     Header
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "~vue-snotify/styles/material";
+// @import "~vue-snotify/styles/material";
 
 p {
   font-size: 2em;
