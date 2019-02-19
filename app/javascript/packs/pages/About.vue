@@ -16,7 +16,7 @@ div
           v-btn(to="/login" outline color='#FF9505') Loginページへ行く
         p
           | GitHubリポジトリ： 
-          a(href="https://github.com/koalamask/el-training-vuejs") https://github.com/koalamask/el-training-vuejs
+          a(href="https://github.com/kaitofu/el-training-vuejs") https://github.com/kaitofu/el-training-vuejs/
 
         p
           | 元となったアプリケーション： 
