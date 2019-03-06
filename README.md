@@ -48,7 +48,7 @@ PostgreSQL 10.4
 
 1. Clone this repository
 ```
-$ git clone git@github.com:koalamask/el-training-vuejs.git
+$ git clone git@github.com:kaitofu/el-training-vuejs.git
 ```
 
 2. Move into your project
@@ -115,4 +115,4 @@ Then, you can see app in `http://localhost:5000`
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/koalamask/el-training-vuejs/blob/master/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/kaitofu/el-training-vuejs/blob/master/LICENSE.md) file for details
