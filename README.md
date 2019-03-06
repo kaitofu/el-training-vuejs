@@ -9,18 +9,26 @@
 
 This application extended El-Training which was created in the learning process of Web application creation using Ruby and Ruby On Rails, tried to improve beyond the curriculum category.
 
+## Screenshots
+#### craete task
+![create](https://user-images.githubusercontent.com/36021748/53469344-ddb02e00-3aa0-11e9-90e3-e5cac0e3adc0.gif)
 
-(Screenshot)
+#### edit ~ update, delete task
+![edit](https://user-images.githubusercontent.com/36021748/53469351-e30d7880-3aa0-11e9-97ac-b23fb3258a9c.gif)
 
 
 ## Published at:
-https://el-training-koalamask.herokuapp.com/
+https://el-training-with-vuejs.herokuapp.com/
 
 The following users can be used in application:
 
-[User as an admininstrator] email: test_user_a@example.com,  password: password
+[User as an admininstrator] 
 
-[Common user] email: test_user_b@example.com,  password: password
+email: test_user_a@example.com,  password: password
+
+[Common user] 
+
+email: test_user_b@example.com,  password: password
 
 ### Curriculum
 [株式会社万葉の新入社員教育用カリキュラム https://everyleaf.com/](https://github.com/everyleaf/el-training)
