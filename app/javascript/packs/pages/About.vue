@@ -16,11 +16,11 @@ div
           v-btn(to="/login" outline color='#FF9505') Loginページへ行く
         p
           | GitHubリポジトリ： 
-          a(href="https://github.com/koalamask/el-training-vuejs") https://github.com/koalamask/el-training-vuejs
+          a(href="https://github.com/kaitofu/el-training-vuejs") https://github.com/kaitofu/el-training-vuejs
 
         p
           | 元となったアプリケーション： 
-          a(href="https://el-training-koalamask.herokuapp.com/") https://el-training-koalamask.herokuapp.com/
+          a(href="https://el-training-kaitofu.herokuapp.com/") https://el-training-kaitofu.herokuapp.com/
 
     v-layout(justify-center='', align-center='', row)
       v-flex(xs12='' md9='')  
@@ -54,7 +54,7 @@ div
     v-layout(justify-center='', align-center='', row)
       v-flex(xs12='' md9='')
         h4 ・今後の更新予定
-        a(href="https://github.com/everyleaf/el-training/blob/master/docs/el-training.md") el-training-vuejs/issues にも記載
+        a(href="https://github.com/kaitofu/el-training-vuejs/issues") el-training-vuejs/issues にも記載
         p
           |  【機能面】
           br
@@ -79,7 +79,7 @@ div
 export default {
   data:{
     return(){
-      url: 'https://github.com/koalamask/el-training-vuejs'
+      url: 'https://github.com/kaitofu/el-training-vuejs'
     }
   }  
 }
